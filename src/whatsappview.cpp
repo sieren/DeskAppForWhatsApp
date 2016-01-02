@@ -19,6 +19,8 @@
 #include "whatsappview.h"
 #include "utilities.hpp"
 #include "platforms.hpp"
+#include <QAction>
+#include <QContextMenuEvent>
 #include <QWebEnginePage>
 #include <QWebEngineScriptCollection>
 #include <QWebEngineSettings>
@@ -36,8 +38,10 @@ WhatsAppView::WhatsAppView(
   UnreadMessagesCallback unreadCb)
  : mNotificationCallback(notifyCb)
  , mUnreadMessagesCallback(unreadCb)
+ , mContextMenu(this)
 {
   initWebView();
+  setupMenu();
 }
 
 
@@ -132,7 +136,11 @@ void WhatsAppView::closeEvent(QCloseEvent *event)
 void WhatsAppView::show()
 {
   QWebEngineView::show();
+  setFocusPolicy(Qt::ClickFocus);
+  setEnabled(true);
+  setFocus();
   deskapp::sysutils::SystemUtility().showDockIcon(true);
+
 }
 
 
@@ -164,6 +172,40 @@ void WhatsAppView::updateUnreadMessages()
   }
   mUnreadMessagesCallback(unreadMessages);
   mLastUnreadMessageCount = unreadMessages;
+}
+
+
+//------------------------------------------------------------------------------------//
+
+void WhatsAppView::setupMenu()
+{
+  QAction *shrtCut = pageAction(QWebEnginePage::Cut);
+  shrtCut->setShortcut(QKeySequence::Cut);
+  mContextMenu.addAction(shrtCut);
+  QWebEngineView::addAction(shrtCut);
+  QAction *shrtCopy = pageAction(QWebEnginePage::Copy);;
+  shrtCopy->setShortcut(QKeySequence::Copy);
+  mContextMenu.addAction(shrtCopy);
+  QWebEngineView::addAction(shrtCopy);
+  QAction *shrtPaste = pageAction(QWebEnginePage::Paste);
+  shrtPaste->setShortcut(QKeySequence::Paste);
+  mContextMenu.addAction(shrtPaste);
+  QWebEngineView::addAction(shrtPaste);
+  QAction *slctAll = pageAction(QWebEnginePage::SelectAll);
+  slctAll->setShortcut(QKeySequence::SelectAll);
+  mContextMenu.addAction(slctAll);
+  QWebEngineView::addAction(slctAll);
+  mContextMenu.addSeparator();
+  QAction *shrtReload = pageAction(QWebEnginePage::Reload);
+  mContextMenu.addAction(shrtReload);
+}
+
+
+//------------------------------------------------------------------------------------//
+
+void WhatsAppView::contextMenuEvent(QContextMenuEvent * event)
+{
+  mContextMenu.exec(event->globalPos());
 }
 
 
