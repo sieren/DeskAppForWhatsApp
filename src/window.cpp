@@ -83,6 +83,8 @@ Window::Window()
     mpWhatsAppView = new WhatsAppView(
       std::bind(&Window::showMessage, this, _1),
       std::bind(&Window::setUnreadMessages, this, _1));
+  
+    showWebView();
 }
 
 
