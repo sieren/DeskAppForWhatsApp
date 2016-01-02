@@ -41,7 +41,7 @@ namespace windows
   {
     int getTrayFontPointSize() override
     {
-       return 200;
+       return 120;
     }
   };
 } // windows
