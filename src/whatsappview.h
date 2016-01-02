@@ -49,10 +49,10 @@ public slots:
 
 private slots:
   void hasFinishedLoading(bool loaded);
+  void updateUnreadMessages();
 
 private:
   void initWebView();
-  void updateUnreadMessages();
 
   int mLastUnreadMessageCount = 0;
   QWebChannel *webCommChannel;

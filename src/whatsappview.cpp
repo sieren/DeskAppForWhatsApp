@@ -61,6 +61,7 @@ void WhatsAppView::initWebView()
   webCommChannel->registerObject(QStringLiteral("foo"), this);
 
   connect(this, SIGNAL(loadFinished(bool)), this, SLOT(hasFinishedLoading(bool)));
+  connect(this, SIGNAL(titleChanged(QString)), this, SLOT(updateUnreadMessages()));
   QWebEngineSettings* settings = newWeb->settings();
   settings->setAttribute(QWebEngineSettings::WebAttribute::JavascriptEnabled, true);
   settings->setAttribute(QWebEngineSettings::WebAttribute::AutoLoadImages,true);
@@ -95,7 +96,6 @@ void WhatsAppView::showNotification(QString sender, QString body, QString id,
   NotificationData notification =
     std::make_tuple(sender.toStdString(), body.toUtf8().toStdString(), id.toStdString());
   mNotificationCallback(notification);
-  updateUnreadMessages();
 }
 
 
