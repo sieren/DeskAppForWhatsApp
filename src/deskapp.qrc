@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>js/inject.js</file>
+        <file>js/jquery.js</file>
+        <file>images/Icon1024.png</file>
+        <file>js/bindings.js</file>
+        <file>js/qwebchannel.js</file>
+        <file>images/deskappWhGrey.png</file>
+        <file>images/deskappGrBlue.png</file>
+        <file>DeskApp.icns</file>
+    </qresource>
+</RCC>
