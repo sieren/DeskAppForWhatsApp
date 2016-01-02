@@ -147,7 +147,8 @@ void WhatsAppView::updateUnreadMessages()
   {
   QStringList list;
   int pos = 0;
-  while ((pos = numExpr.indexIn(title, pos)) != -1) {
+  while ((pos = numExpr.indexIn(title, pos)) != -1)
+  {
        list << numExpr.cap(1);
        pos += numExpr.matchedLength();
    }
