@@ -288,7 +288,7 @@ void Window::createTrayIcon()
 
 void Window::saveSettings()
 {
-   mSettings.setValue("notificationsEnabled", mNotificationsEnabled);
+  mSettings.setValue("notificationsEnabled", mNotificationsEnabled);
 }
 
 
@@ -296,7 +296,7 @@ void Window::saveSettings()
 
 void Window::loadSettings()
 {
-   mNotificationsEnabled = mSettings.value("notificationsEnabled").toBool();
+  mNotificationsEnabled = mSettings.value("notificationsEnabled").toBool();
 }
 
 
