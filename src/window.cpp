@@ -73,7 +73,7 @@ Window::Window()
     setIcon(0);
     mpTrayIcon->show();
     #ifdef Q_OS_MAC
-      this->setWindowIcon(QIcon(":/images/syncthing.icns"));
+      this->setWindowIcon(QIcon(":/images/DeskApp.icns"));
     #endif
     setWindowTitle(tr("DeskApp For WhatsApp"));
     resize(maximumWidth / devicePixelRatio(), 150);
@@ -83,6 +83,8 @@ Window::Window()
     mpWhatsAppView = new WhatsAppView(
       std::bind(&Window::showMessage, this, _1),
       std::bind(&Window::setUnreadMessages, this, _1));
+  
+    showWebView();
 }
 
 
@@ -288,7 +290,7 @@ void Window::createTrayIcon()
 
 void Window::saveSettings()
 {
-   mSettings.setValue("notificationsEnabled", mNotificationsEnabled);
+  mSettings.setValue("notificationsEnabled", mNotificationsEnabled);
 }
 
 
@@ -296,7 +298,7 @@ void Window::saveSettings()
 
 void Window::loadSettings()
 {
-   mNotificationsEnabled = mSettings.value("notificationsEnabled").toBool();
+  mNotificationsEnabled = mSettings.value("notificationsEnabled").toBool();
 }
 
 

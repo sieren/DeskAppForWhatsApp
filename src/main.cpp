@@ -17,6 +17,8 @@
  **************************************************************************************/
 
 #include <QApplication>
+#include <QSharedMemory>
+#include <QSystemSemaphore>
 
 #ifndef QT_NO_SYSTEMTRAYICON
 
@@ -29,6 +31,43 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(deskapp);
 
     QApplication app(argc, argv);
+
+    QSystemSemaphore sema("75ddae3a-1e79-43d5-9efa-ea7ffd67d02a", 1);
+    sema.acquire();
+
+    #ifndef Q_OS_WIN32
+    // on posix systemsshared memory is not freed upon crash
+    // so if there is anything left from a previous instance
+    // we'll do some cleanup
+    QSharedMemory nix_fix_shmem("75ddae3a-1e79-43d5-9efa-ea7ffdddd02a");
+    if(nix_fix_shmem.attach())
+    {
+      nix_fix_shmem.detach();
+    }
+    #endif
+
+    QSharedMemory shmem("75ddae3a-1e79-43d5-9efa-ea7ffdddd02a");
+    bool is_running;
+    if (shmem.attach())
+    {
+      is_running = true;
+    }
+    else
+    {
+      shmem.create(1);
+      is_running = false;
+    }
+    sema.release();
+
+    if(is_running)
+    {
+      QMessageBox msgBox;
+      msgBox.setIcon(QMessageBox::Warning);
+      msgBox.setText("You already have this app running."
+                     "\r\nOnly one instance is allowed.");
+      msgBox.exec();
+      return 1;
+    }
 
     if (!QSystemTrayIcon::isSystemTrayAvailable()) {
         QMessageBox::critical(0, QObject::tr("DeskApp For WhatsApp"),

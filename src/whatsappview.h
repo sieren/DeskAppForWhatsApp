@@ -23,6 +23,7 @@
 #include <QWebEngineView>
 #include "qwhatspageview.h"
 #include "utilities.hpp"
+#include <QMenu>
 #include <QWebEngineView>
 #include <QDialog>
 
@@ -43,6 +44,8 @@ public:
   void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
   void show();
   int getLastUnreadMessageCount();
+  virtual void contextMenuEvent(QContextMenuEvent * event) override;
+
 public slots:
   void showNotification(QString sender, QString body, QString id,
     QString imageUrl);
@@ -53,12 +56,15 @@ private slots:
 
 private:
   void initWebView();
+  void setupMenu();
 
   int mLastUnreadMessageCount = 0;
   QWebChannel *webCommChannel;
   QWhatsAppPageView *newWeb;
   NotificationCallback mNotificationCallback;
   UnreadMessagesCallback mUnreadMessagesCallback;
+
+  QMenu mContextMenu;
 };
 
 #endif // WHATSAPPVIEW_H
