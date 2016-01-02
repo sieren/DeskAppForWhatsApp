@@ -77,7 +77,8 @@ Window::Window()
     #endif
     setWindowTitle(tr("DeskApp For WhatsApp"));
     resize(maximumWidth / devicePixelRatio(), 150);
-  
+    this->setWindowFlags(Qt::WindowMinMaxButtonsHint | Qt::WindowCloseButtonHint);
+
     using namespace std::placeholders;
     mpWhatsAppView = new WhatsAppView(
       std::bind(&Window::showMessage, this, _1),
