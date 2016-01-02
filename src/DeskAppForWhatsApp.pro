@@ -27,6 +27,7 @@ macx {
 QMAKE_INFO_PLIST = Info.plist
 LIBS += -framework ApplicationServices
 LIBS += -framework Foundation
+QMAKE_MAC_SDK = macosx10.11
 }
 #QMAKE_CXXFLAGS += /wd4996
 ICON = DeskApp.icns
