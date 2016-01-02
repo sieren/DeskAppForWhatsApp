@@ -45,7 +45,7 @@ namespace generic
     {
       UNUSED(cb);
       mpIcon->showMessage(std::get<0>(data).c_str(), std::get<1>(data).c_str(),
-        QSystemTrayIcon::Warning, 1000);
+        QSystemTrayIcon::Information);
     }
   protected:
      ReplyCallback mReplyCallback;
