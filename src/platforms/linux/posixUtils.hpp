@@ -39,7 +39,10 @@ namespace linux
 {
   struct PosixUtils : public generic::BaseUtils
   {
-
+    int getTrayFontPointSize() override
+    {
+       return 150;
+    }
   };
 } // posix
 } // sysutils

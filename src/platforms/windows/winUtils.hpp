@@ -39,7 +39,10 @@ namespace windows
 {
   struct WinUtils : public generic::BaseUtils
   {
-
+    int getTrayFontPointSize() override
+    {
+       return 200;
+    }
   };
 } // windows
 } // platforms
