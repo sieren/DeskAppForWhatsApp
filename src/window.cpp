@@ -73,7 +73,7 @@ Window::Window()
     setIcon(0);
     mpTrayIcon->show();
     #ifdef Q_OS_MAC
-      this->setWindowIcon(QIcon(":/images/syncthing.icns"));
+      this->setWindowIcon(QIcon(":/images/DeskApp.icns"));
     #endif
     setWindowTitle(tr("DeskApp For WhatsApp"));
     resize(maximumWidth / devicePixelRatio(), 150);
