@@ -144,7 +144,7 @@ void Window::setUnreadMessages(int msgs)
   setIcon(0); // reset to default
   QPixmap pix = mpTrayIcon->icon().pixmap(744,744);
   QFont font = QApplication::font();
-  font.setPointSize(400);
+  font.setPointSize(mSystemUtility.getTrayFontPointSize());
   font.setBold(true);
   QPainter *painter = new QPainter(&pix);
   painter->setFont(font);

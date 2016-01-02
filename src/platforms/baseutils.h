@@ -47,6 +47,7 @@ namespace generic
       mpIcon->showMessage(std::get<0>(data).c_str(), std::get<1>(data).c_str(),
         QSystemTrayIcon::Information);
     }
+     virtual int getTrayFontPointSize() = 0;
   protected:
      ReplyCallback mReplyCallback;
   };

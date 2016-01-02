@@ -54,6 +54,11 @@ namespace darwin
     #pragma clang diagnostic pop
     }
 
+    int getTrayFontPointSize() override
+    {
+       return 400;
+    }
+
     virtual void showMessage(
        QSystemTrayIcon *mpIcon, NotificationData data, ReplyCallback cb = 0) override;
 
