@@ -42,6 +42,12 @@ This project does not attempt to reverse engineer the WhatsApp API or attempt to
   
 Any communication between the user and WhatsApp servers is handled by WhatsApp Web itself; this is merely a native wrapper for WhatsApp Web, more akin to a browser than any WhatsApp software.
 
+## Known Issues
+Qt 5.5 currently does not support HiDPI properly.
+Thus UI Elements may be shown too small on certain platforms (e.g. Linux) when in HiDPI
+mode.
+This will be fixed once this project moves on to Qt 5.6.
+
 ## Build
 + Get a recent version of Qt (5.5+)  
 
