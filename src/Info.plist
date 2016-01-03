@@ -6,8 +6,6 @@
 	<string>DeskApp.icns</string>
 	<key>NSHighResolutionCapable</key>
 	<true/>
-	<key>SUFeedURL</key>
-	<string>http://raw.githubusercontent.com/sieren/DeskAppForWhatsApp/master/AppCast.xml</string>
 	<key>CFBundleVersion</key>
 	<string>0.1.2</string>
 	<key>NSAppTransportSecurity</key>
@@ -19,5 +17,7 @@
 	<string>com.sieren.deskapp</string>
 	<key>LSUIElement</key>
 	<true/>
+        <key>SUPublicDSAKeyFile</key>
+        <string>dsa_pub.pem</string>
 </dict>
 </plist>

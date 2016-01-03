@@ -56,10 +56,11 @@ SET_SOURCE_FILES_PROPERTIES(
   if(APPLE)
    find_library(SPARKLE_FRAMEWORK Sparkle)
     FIND_LIBRARY(COCOA_LIBRARY Cocoa)
-    add_executable(DeskApp MACOSX_BUNDLE src/DeskApp.icns ${UI_HEADERS} ${UI_RESOURCES} ${FILES_WP})
+    add_executable(DeskApp MACOSX_BUNDLE src/DeskApp.icns ${UI_HEADERS} ${UI_RESOURCES}
+      ${FILES_WP} ${SRC_ROOT}/resources/mac/dsa_pub.pem)
     set_target_properties(DeskApp PROPERTIES MACOSX_BUNDLE_INFO_PLIST
       ${SRC_ROOT}/Info.plist)
-   
+    set_target_properties(DeskApp PROPERTIES RESOURCE ${SRC_ROOT}/resources/mac/dsa_pub.pem)
   elseif(WIN32)
     add_executable(DeskApp WIN32 ${UI_HEADERS} ${UI_RESOURCES} ${FILES_WP})
   elseif(UNIX)

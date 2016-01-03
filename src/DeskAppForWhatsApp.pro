@@ -39,5 +39,8 @@ ICON = DeskApp.icns
 macx {
 APP_BINARY_FILES.files = Info.plist
 APP_BINARY_FILES.path = Contents/Resources
+SPARKLE_DSA_FILE.files = resources/mac/dsa_pub.pem
+SPARKLE_DSA_FILE.path = Contents/Resources
 QMAKE_BUNDLE_DATA += APP_BINARY_FILES
+QMAKE_BUNDLE_DATA += SPARKLE_DSA_FILE
 }
