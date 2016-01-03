@@ -79,7 +79,6 @@ void WhatsAppView::initWebView()
 
 void WhatsAppView::sendReplyMessage(ReplyData msg)
 {
-  std::cout << "GOT REPLY" << std::endl;
   QString openChatJs = QString("openChat(\"%1\")").arg(std::get<1>(msg).c_str());
   QString sendMessageJs = QString(
     "dispatch(document.querySelector('div.input'), 'textInput', '%1')").arg(
