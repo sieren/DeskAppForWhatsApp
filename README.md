@@ -4,6 +4,10 @@ DeskApp for WhatsApp (Unofficial)
 
 ![Travis CI](https://travis-ci.org/sieren/DeskAppForWhatsApp.svg?branch=master "Travis CI
 Status")
+[![Issues](https://img.shields.io/github/issues/sieren/DeskAppForWhatsApp.svg
+"Issues")](https://github.com/sieren/DeskAppForWhatsApp/issues)
+[![Downloads](https://img.shields.io/github/downloads/sieren/DeskAppForWhatsApp/total.svg "Downloads")](https://github.com/sieren/DeskAppForWhatsApp/releases)
+
 
 
 A simple cross-platform desktop Client for WhatsApp which runs on OS X, Linux and Windows.
