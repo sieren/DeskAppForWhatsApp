@@ -21,6 +21,8 @@
 #include "platforms.hpp"
 #include <QAction>
 #include <QContextMenuEvent>
+#include <QFileDialog>
+#include <QMessageBox>
 #include <QWebEnginePage>
 #include <QWebEngineScriptCollection>
 #include <QWebEngineSettings>
@@ -59,6 +61,8 @@ void WhatsAppView::initWebView()
   QWebEngineProfile *profile = QWebEngineProfile::defaultProfile();
   profile->setHttpUserAgent(kUserAgent.c_str());
   profile->setPersistentCookiesPolicy(QWebEngineProfile::ForcePersistentCookies);
+  connect(profile, SIGNAL(downloadRequested(QWebEngineDownloadItem*)), this,
+    SLOT(onDownloadRequested(QWebEngineDownloadItem*)));
   newWeb = new QWhatsAppPageView(profile);
 
   webCommChannel = new QWebChannel();
@@ -200,6 +204,58 @@ void WhatsAppView::setupMenu()
   addActions(std::bind(&QWebEngineView::addAction, this, _1), shrtReload);
 }
 
+
+//------------------------------------------------------------------------------------//
+
+void WhatsAppView::onDownloadRequested(QWebEngineDownloadItem *download)
+{
+  QString dir = QFileDialog::getSaveFileName(
+    this,
+    tr("Download"),
+    download->path());
+
+  if (dir.isEmpty())
+  {
+    download->cancel();
+    return;
+  }
+
+  connect(download,  &QWebEngineDownloadItem::stateChanged,
+    this,&WhatsAppView::showDownloadState);
+  download->setPath(dir);
+  download->accept();
+}
+
+
+//------------------------------------------------------------------------------------//
+
+void WhatsAppView::showDownloadState(QWebEngineDownloadItem::DownloadState state)
+{
+  QString stateInString(tr(""));
+  switch (state)
+  {
+    case QWebEngineDownloadItem::DownloadCompleted:
+      stateInString = tr("Download Complete");
+      break;
+    case QWebEngineDownloadItem::DownloadCancelled:
+      stateInString = tr("Download Cancelled");
+      break;
+    case QWebEngineDownloadItem::DownloadInterrupted:
+      stateInString = tr("Download Interrupted - please try again");
+      break;
+    case QWebEngineDownloadItem::DownloadInProgress:
+    default:
+      break;
+  }
+
+  if(stateInString != tr(""))
+  {
+    QMessageBox msgBox;
+    msgBox.setIcon(QMessageBox::Warning);
+    msgBox.setText(stateInString);
+    msgBox.exec();
+  }
+}
 
 
 //------------------------------------------------------------------------------------//
