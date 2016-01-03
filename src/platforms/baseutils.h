@@ -50,6 +50,7 @@ namespace generic
         QSystemTrayIcon::Information);
     }
      virtual int getTrayFontPointSize() = 0;
+     virtual void checkForUpdates() { }
   protected:
      ReplyCallback mReplyCallback;
   };

@@ -23,6 +23,9 @@
 #ifndef QT_NO_SYSTEMTRAYICON
 
 #include <QMessageBox>
+#include <QString>
+#include "platforms.hpp"
+#include "utilities.hpp"
 #include "window.h"
 
 
@@ -81,6 +84,12 @@ int main(int argc, char *argv[])
 #ifdef QT_DEBUG
     qputenv("QTWEBENGINE_REMOTE_DEBUGGING", "23654");
 #endif
+    using namespace deskapp::sysutils;
+    SystemUtility *updateUtility = new SystemUtility(QString(kMacAppCastUrl.c_str()));
+    if (updateUtility)
+    {
+      updateUtility->checkForUpdates();
+    }
     return app.exec();
 }
 

@@ -53,6 +53,9 @@ using ReplyCallback = std::function<void(ReplyData)>;
 // Number of unread messages
 using UnreadMessagesCallback = std::function<void(int)>;
 
+// Auto Updater URLs
+static const std::string kMacAppCastUrl =
+    "https://raw.githubusercontent.com/sieren/DeskAppForWhatsApp/master/AppCast.xml";
 //------------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------------//
 

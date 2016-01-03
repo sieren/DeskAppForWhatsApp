@@ -38,6 +38,9 @@ namespace darwin
   class MacUtils : public BaseUtils
   {
   public:
+    MacUtils(QString url);
+    MacUtils() = default;
+    ~MacUtils();
 
     void showDockIcon(bool show) override
     {
@@ -61,6 +64,10 @@ namespace darwin
 
     virtual void showMessage(
        QSystemTrayIcon *mpIcon, NotificationData data, ReplyCallback cb = 0) override;
+    
+  private:
+    class UpdateContainer;
+    UpdateContainer *sparkleContainer;
 
   };
 } // darwin

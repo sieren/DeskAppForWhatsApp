@@ -18,6 +18,7 @@
 
 #import "macUtils.h"
 #include <Foundation/Foundation.h>
+#include "../../lib/Sparkle.framework/Headers/Sparkle.h"
 
 //------------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------------//
@@ -52,6 +53,32 @@ namespace platforms
 {
 namespace darwin
 {
+  class MacUtils::UpdateContainer
+  {
+    public:
+      UpdateContainer() = default;
+      NSAutoreleasePool* autoReleasePool;
+      SUUpdater *updater;
+
+  };
+  
+  MacUtils::~MacUtils()
+  {
+    if (sparkleContainer)
+    {
+      [sparkleContainer->autoReleasePool release];
+    }
+  }
+
+  MacUtils::MacUtils(QString url)
+  {
+    NSApplicationLoad();
+    sparkleContainer = new UpdateContainer;
+    sparkleContainer->autoReleasePool = [NSAutoreleasePool new];
+    NSString *feedUrl = [NSString stringWithUTF8String: url.toUtf8().data()];
+    [[NSUserDefaults standardUserDefaults] setValue:feedUrl forKey:@"SUFeedURL"];
+    sparkleContainer->updater = [[SUUpdater sharedUpdater] retain];
+  }
 
   void MacUtils::showMessage(
      QSystemTrayIcon *mpIcon, NotificationData data, ReplyCallback cb)
