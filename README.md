@@ -24,6 +24,7 @@ Precompiled and ready-to-install binaries are [here](https://github.com/sieren/D
 
 + System Notifications on incoming messages.
 + Number of unread conversations in Tray Icon.
++ Up- and Download Attachments sent through WhatsApp.
 + Optional monochrome icon for black/white themes.
 + OS X: Quick Reply functionality in notifications.
 
