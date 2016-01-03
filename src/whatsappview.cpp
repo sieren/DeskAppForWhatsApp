@@ -182,24 +182,24 @@ void WhatsAppView::setupMenu()
 {
   QAction *shrtCut = pageAction(QWebEnginePage::Cut);
   shrtCut->setShortcut(QKeySequence::Cut);
-  mContextMenu.addAction(shrtCut);
-  QWebEngineView::addAction(shrtCut);
   QAction *shrtCopy = pageAction(QWebEnginePage::Copy);;
   shrtCopy->setShortcut(QKeySequence::Copy);
-  mContextMenu.addAction(shrtCopy);
-  QWebEngineView::addAction(shrtCopy);
   QAction *shrtPaste = pageAction(QWebEnginePage::Paste);
   shrtPaste->setShortcut(QKeySequence::Paste);
-  mContextMenu.addAction(shrtPaste);
-  QWebEngineView::addAction(shrtPaste);
   QAction *slctAll = pageAction(QWebEnginePage::SelectAll);
   slctAll->setShortcut(QKeySequence::SelectAll);
-  mContextMenu.addAction(slctAll);
-  QWebEngineView::addAction(slctAll);
+
+  using namespace std::placeholders;
+  addActions(std::bind(&QWidget::addAction, &mContextMenu, _1),
+             shrtCut, shrtCopy, shrtPaste, slctAll);
+  addActions(std::bind(&QWebEngineView::addAction, this, _1),
+             shrtCut, shrtCopy, shrtPaste, slctAll);
+
   mContextMenu.addSeparator();
   QAction *shrtReload = pageAction(QWebEnginePage::Reload);
-  mContextMenu.addAction(shrtReload);
+  addActions(std::bind(&QWebEngineView::addAction, this, _1), shrtReload);
 }
+
 
 
 //------------------------------------------------------------------------------------//
@@ -215,6 +215,25 @@ void WhatsAppView::contextMenuEvent(QContextMenuEvent * event)
 int WhatsAppView::getLastUnreadMessageCount()
 {
   return mLastUnreadMessageCount;
+}
+
+
+//------------------------------------------------------------------------------------//
+
+template<typename F, typename T, typename... TArgs>
+void WhatsAppView::addActions(F &&funct, T action, TArgs... Actions)
+{
+  funct(action);
+  addActions(funct, std::forward<TArgs>(Actions)...);
+}
+
+
+//------------------------------------------------------------------------------------//
+
+template<typename F, typename T>
+void WhatsAppView::addActions(F &&funct, T action)
+{
+  funct(action);
 }
 
 

@@ -19,6 +19,7 @@
 #ifndef WHATSAPPVIEW_H
 #define WHATSAPPVIEW_H
 
+#include <functional>
 #include <QObject>
 #include <QWebEngineView>
 #include "qwhatspageview.h"
@@ -65,6 +66,12 @@ private:
   UnreadMessagesCallback mUnreadMessagesCallback;
 
   QMenu mContextMenu;
+
+  template<typename F, typename T, typename... TArgs>
+  void addActions(F &&funct, T action, TArgs... Actions);
+
+  template<typename F, typename T>
+  void addActions(F &&funct, T action);
 };
 
 #endif // WHATSAPPVIEW_H
