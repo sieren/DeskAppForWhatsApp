@@ -25,6 +25,7 @@
 #include "qwhatspageview.h"
 #include "utilities.hpp"
 #include <QMenu>
+#include <QWebEngineDownloadItem>
 #include <QWebEngineView>
 #include <QDialog>
 
@@ -54,6 +55,8 @@ public slots:
 private slots:
   void hasFinishedLoading(bool loaded);
   void updateUnreadMessages();
+  void onDownloadRequested(QWebEngineDownloadItem *download);
+  void showDownloadState(QWebEngineDownloadItem::DownloadState state);
 
 private:
   void initWebView();
