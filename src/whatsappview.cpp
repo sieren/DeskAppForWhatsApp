@@ -107,17 +107,20 @@ void WhatsAppView::showNotification(QString sender, QString body, QString id,
 
 void WhatsAppView::hasFinishedLoading(bool loaded)
 {
-    if(loaded)
-    {
-            using namespace deskapp::utilities;
-            newWeb->setWebChannel(webCommChannel);
-            QString webChannelJS = loadJSFile(kWebChannelPath.c_str());
-            QString injectJS = loadJSFile(kinjectJSPath.c_str());
-            QString jqueryJS = loadJSFile(kjQueryPath.c_str());
-            newWeb->runJavaScript(jqueryJS, [](const QVariant &result){ qDebug() << result; });
-            newWeb->runJavaScript(webChannelJS, [](const QVariant &result){ qDebug() << result; });
-            newWeb->runJavaScript(injectJS, [](const QVariant &result){ qDebug() << result; });
-    }
+  if(loaded)
+  {
+    using namespace deskapp::utilities;
+    newWeb->setWebChannel(webCommChannel);
+    QString webChannelJS = loadJSFile(kWebChannelPath.c_str());
+    QString injectJS = loadJSFile(kinjectJSPath.c_str());
+    QString jqueryJS = loadJSFile(kjQueryPath.c_str());
+    newWeb->runJavaScript(jqueryJS,
+      [](const QVariant &result){ qDebug() << result; });
+    newWeb->runJavaScript(webChannelJS,
+      [](const QVariant &result){ qDebug() << result; });
+    newWeb->runJavaScript(injectJS,
+      [](const QVariant &result){ qDebug() << result; });
+  }
   updateUnreadMessages();
 }
 
@@ -140,7 +143,6 @@ void WhatsAppView::show()
   setEnabled(true);
   setFocus();
   deskapp::sysutils::SystemUtility().showDockIcon(true);
-
 }
 
 
@@ -157,9 +159,9 @@ void WhatsAppView::updateUnreadMessages()
   int pos = 0;
   while ((pos = numExpr.indexIn(title, pos)) != -1)
   {
-       list << numExpr.cap(1);
-       pos += numExpr.matchedLength();
-   }
+    list << numExpr.cap(1);
+    pos += numExpr.matchedLength();
+  }
   QString result = list.join("");
   try
   {

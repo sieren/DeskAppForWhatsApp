@@ -44,7 +44,9 @@ namespace generic
         QSystemTrayIcon *mpIcon, NotificationData data, ReplyCallback cb = 0)
     {
       UNUSED(cb);
-      mpIcon->showMessage(std::get<0>(data).c_str(), std::get<1>(data).c_str(),
+      mpIcon->showMessage(
+        std::get<0>(data).c_str(),
+        std::get<1>(data).c_str(),
         QSystemTrayIcon::Information);
     }
      virtual int getTrayFontPointSize() = 0;
