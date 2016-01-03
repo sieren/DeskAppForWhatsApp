@@ -41,7 +41,7 @@ Launch the application and authorize with WhatsApp on your phone by scanning the
 To start DeskApp for WhatsApp at boot (OS X):
 
 + Go to **System Preferences** and **Users & Groups**
-+ Drag QSyncthingTray into the **Login Items** list
++ Drag DeskAppForWhatsApp into the **Login Items** list
 
 ## Note
 This project does not attempt to reverse engineer the WhatsApp API or attempt to reimplement any part of the WhatsApp client's communications with the WhatsApp servers.  
@@ -71,7 +71,7 @@ cmake ../ -G Xcode
 cd ./src  
 qmake -config release  
 make  
-./QSyncthingTray
+./DeskAppForWhatsApp
 ```
 
 ## License
