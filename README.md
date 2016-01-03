@@ -58,12 +58,20 @@ This will be fixed once this project moves on to Qt 5.6.
 ## Build
 + Get a recent version of Qt (5.5+)  
 
-### Mac & Windows
+### Mac 
++ Use either QtCreator or create an XCode Project with CMake or QMake.  
++ Copy Sparkle.framework from /lib to ~/Library/Frameworks
+```
+mkdir build && cd build  
+cmake ../ -G Xcode
+```
+### Windows
 + Use either QtCreator or create an XCode or Visual Studio Project with CMake or QMake.  
 ```
 mkdir build && cd build  
 cmake ../ -G Xcode
 ```
+
 
 ### Linux
 + Get the most recent [Qt Version](http://www.qt.io/download/)
